@@ -1,0 +1,8 @@
+name: "My ResearchE Class Website"
+navbar:
+  title: "My ResearchE Class Website"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
