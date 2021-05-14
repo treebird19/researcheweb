@@ -11,7 +11,7 @@
 
 
 
-<title>Method &amp; Results</title>
+<title>Introduction</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -268,67 +268,12 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Method &amp; Results</h1>
+<h1 class="title toc-ignore">Introduction</h1>
 
 </div>
 
 
-<div id="method-results" class="section level1">
-<h1>Method &amp; Results</h1>
-<div id="data-download" class="section level2">
-<h2>Data download</h2>
-<pre class="r"><code>ids &lt;- c(&quot;hayleykim97&quot;,
-         &quot;th-kim310&quot;,
-         &quot;Lelp27&quot;,
-         &quot;aputron&quot;,
-         &quot;gpemelianov&quot;,
-         &quot;yoo-bh&quot;,
-         &quot;seokjin-oh&quot;,
-         &quot;treebird19&quot;,
-         &quot;jinjulee119&quot;)
-downpath &lt;- &quot;download/promoter/&quot; 
-
-for (l in ids) {
-  try(download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/partdb.xlsx&quot;),
-                    paste0(&quot;download/promoter/&quot;, l, &quot;.xlsx&quot;)))
-  cat(l, &quot;\n&quot;); flush.console()
-}</code></pre>
-</div>
-<div id="data-preprocessing" class="section level2">
-<h2>Data preprocessing</h2>
-<pre class="r"><code>library(readxl)
-library(tidyverse)
-
-files &lt;- paste0(downpath,
-                dir(path = downpath, pattern = &quot;*.xlsx$&quot;))
-
-ls_team &lt;- list()
-ls_part &lt;- list()
-ls_obs &lt;- list()
-
-for (i in 1:length(files)) {
-  ls_team[[i]] &lt;- read_excel(files, sheet = 1)
-  ls_part[[i]] &lt;- read_excel(files, sheet = 2)
-  ls_obs[[i]] &lt;- read_excel(files, sheet = 3)
-  
-  rm(i)
-}
-
-
-# To make type be the same &amp; bind rows
-igem_team &lt;- do.call(bind_rows,
-                     lapply(ls_team,
-                            function(x) x$year &lt;- as.character(x$year)))
-
-igem_part &lt;- do.call(bind_rows, ls_part)
-
-ls_obs_mut &lt;- lapply(ls_team, function(x) x$conc &lt;- as.numeric(x$conc))
-ls_obs_mut &lt;- lapply(ls_team, function(x) x$incubtemp &lt;- as.character(x$incubtemp))
-ls_obs_mut &lt;- lapply(ls_team, function(x) x$id &lt;- as.character(x$id))
-ls_obs_mut &lt;- lapply(ls_team, function(x) x$incubhr &lt;- as.character(x$incubhr))
-igem_obs &lt;- do.call(bind_rows, ls_obs_mut)</code></pre>
-</div>
-</div>
+<p>Introduction</p>
 
 
 
