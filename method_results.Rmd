@@ -60,7 +60,7 @@ igem_part <- do.call(bind_rows, ls_part)
 
 
 # Modify the column name
-ls_obs <- ls_obs[-1]  # remove wrong a element
+ls_obs <- ls_obs[-1]  # remove a wrong element
 
 ls_obs_mut <- lapply(ls_obs,
                      function(x) mutate_at(x, .vars = "conc", as.numeric))
