@@ -20,7 +20,7 @@ downpath <- "download/promoter/"
 for (l in ids) {
   try(download.file(paste0("https://github.com/", l,
                            "/researcheweb/raw/main/partdb.xlsx"),
-                    paste0("download/promoter/", l, ".xlsx")))
+                    paste0(downpath, l, ".xlsx")))
   cat(l, "\n"); flush.console()
   
   rm(l)
