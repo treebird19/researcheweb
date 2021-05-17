@@ -287,17 +287,66 @@ $(document).ready(function () {
 downpath &lt;- &quot;download/promoter/&quot; 
 
 for (l in ids) {
-  try(download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/partdb.xlsx&quot;),
+  try(download.file(paste0(&quot;https://github.com/&quot;, l,
+                           &quot;/researcheweb/raw/main/partdb.xlsx&quot;),
                     paste0(&quot;download/promoter/&quot;, l, &quot;.xlsx&quot;)))
   cat(l, &quot;\n&quot;); flush.console()
+  
+  rm(l)
 }</code></pre>
+<pre><code>## Warning in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/
+## raw/main/partdb.xlsx&quot;), : cannot open URL &#39;https://github.com/hayleykim97/
+## researcheweb/raw/main/partdb.xlsx&#39;: HTTP status was &#39;404 Not Found&#39;</code></pre>
+<pre><code>## Error in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/raw/main/partdb.xlsx&quot;),  : 
+##   cannot open URL &#39;https://github.com/hayleykim97/researcheweb/raw/main/partdb.xlsx&#39;
+## hayleykim97</code></pre>
+<pre><code>## Warning in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/
+## raw/main/partdb.xlsx&quot;), : cannot open URL &#39;https://github.com/th-kim310/
+## researcheweb/raw/main/partdb.xlsx&#39;: HTTP status was &#39;404 Not Found&#39;</code></pre>
+<pre><code>## Error in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/raw/main/partdb.xlsx&quot;),  : 
+##   cannot open URL &#39;https://github.com/th-kim310/researcheweb/raw/main/partdb.xlsx&#39;
+## th-kim310</code></pre>
+<pre><code>## Warning in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/raw/
+## main/partdb.xlsx&quot;), : cannot open URL &#39;https://github.com/Lelp27/researcheweb/
+## raw/main/partdb.xlsx&#39;: HTTP status was &#39;404 Not Found&#39;</code></pre>
+<pre><code>## Error in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/raw/main/partdb.xlsx&quot;),  : 
+##   cannot open URL &#39;https://github.com/Lelp27/researcheweb/raw/main/partdb.xlsx&#39;
+## Lelp27 
+## aputron</code></pre>
+<pre><code>## Warning in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/
+## raw/main/partdb.xlsx&quot;), : cannot open URL &#39;https://github.com/gpemelianov/
+## researcheweb/raw/main/partdb.xlsx&#39;: HTTP status was &#39;404 Not Found&#39;</code></pre>
+<pre><code>## Error in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/raw/main/partdb.xlsx&quot;),  : 
+##   cannot open URL &#39;https://github.com/gpemelianov/researcheweb/raw/main/partdb.xlsx&#39;
+## gpemelianov</code></pre>
+<pre><code>## Warning in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/raw/
+## main/partdb.xlsx&quot;), : cannot open URL &#39;https://github.com/yoo-bh/researcheweb/
+## raw/main/partdb.xlsx&#39;: HTTP status was &#39;404 Not Found&#39;</code></pre>
+<pre><code>## Error in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/raw/main/partdb.xlsx&quot;),  : 
+##   cannot open URL &#39;https://github.com/yoo-bh/researcheweb/raw/main/partdb.xlsx&#39;
+## yoo-bh</code></pre>
+<pre><code>## Warning in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/
+## raw/main/partdb.xlsx&quot;), : cannot open URL &#39;https://github.com/seokjin-oh/
+## researcheweb/raw/main/partdb.xlsx&#39;: HTTP status was &#39;404 Not Found&#39;</code></pre>
+<pre><code>## Error in download.file(paste0(&quot;https://github.com/&quot;, l, &quot;/researcheweb/raw/main/partdb.xlsx&quot;),  : 
+##   cannot open URL &#39;https://github.com/seokjin-oh/researcheweb/raw/main/partdb.xlsx&#39;
+## seokjin-oh 
+## treebird19 
+## jinjulee119</code></pre>
 </div>
 <div id="data-preprocessing" class="section level1">
 <h1>Data preprocessing</h1>
 <pre class="r"><code>library(readxl)
-library(tidyverse)
-
-files &lt;- paste0(downpath,
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+## ✓ tibble  3.1.0     ✓ dplyr   1.0.5
+## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+## ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>files &lt;- paste0(downpath,
                 dir(path = downpath, pattern = &quot;*.xlsx$&quot;))
 
 ls_team &lt;- list()
@@ -305,9 +354,9 @@ ls_part &lt;- list()
 ls_obs &lt;- list()
 
 for (i in 1:length(files)) {
-  ls_team[[i]] &lt;- read_excel(files, sheet = 1)
-  ls_part[[i]] &lt;- read_excel(files, sheet = 2)
-  ls_obs[[i]] &lt;- read_excel(files, sheet = 3)
+  ls_team[[i]] &lt;- read_excel(files[[i]], sheet = 1)
+  ls_part[[i]] &lt;- read_excel(files[[i]], sheet = 2)
+  ls_obs[[i]] &lt;- read_excel(files[[i]], sheet = 3)
   
   rm(i)
 }
@@ -316,15 +365,66 @@ for (i in 1:length(files)) {
 # To make type be the same &amp; bind rows
 igem_team &lt;- do.call(bind_rows,
                      lapply(ls_team,
-                            function(x) x$year &lt;- as.character(x$year)))
+                            function(x) mutate_at(x, .vars = &quot;year&quot;, as.character)))
 
 igem_part &lt;- do.call(bind_rows, ls_part)
 
-ls_obs_mut &lt;- lapply(ls_team, function(x) x$conc &lt;- as.numeric(x$conc))
-ls_obs_mut &lt;- lapply(ls_team, function(x) x$incubtemp &lt;- as.character(x$incubtemp))
-ls_obs_mut &lt;- lapply(ls_team, function(x) x$id &lt;- as.character(x$id))
-ls_obs_mut &lt;- lapply(ls_team, function(x) x$incubhr &lt;- as.character(x$incubhr))
+
+# Modify the column name
+ls_obs &lt;- ls_obs[-1]  # remove wrong a element
+
+ls_obs_mut &lt;- lapply(ls_obs,
+                     function(x) mutate_at(x, .vars = &quot;conc&quot;, as.numeric))</code></pre>
+<pre><code>## Warning in mask$eval_all_mutate(quo): NAs introduced by coercion</code></pre>
+<pre class="r"><code>ls_obs_mut &lt;- lapply(ls_obs_mut,
+                     function(x) mutate_at(x, .vars = &quot;incubtemp&quot;, as.character))
+ls_obs_mut &lt;- lapply(ls_obs_mut,
+                     function(x) mutate_at(x, .vars = &quot;id&quot;, as.character))
+ls_obs_mut &lt;- lapply(ls_obs_mut,
+                     function(x) mutate_at(x, .vars = &quot;incubhr&quot;, as.character))
 igem_obs &lt;- do.call(bind_rows, ls_obs_mut)</code></pre>
+<pre class="r"><code>igem_team</code></pre>
+<pre><code>## # A tibble: 8 x 5
+##      id team_name  project                              year  wiki              
+##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;                                &lt;chr&gt; &lt;chr&gt;             
+## 1     1 ZJU-China  PaDetector, a household device for … 2019  https://2019.igem…
+## 2     2 UCSF       OperationCRISPR                      2013  http://2013.igem.…
+## 3     1 iBowu-Chi… Biocontrol of Soft Rot               2019  https://2019.igem…
+## 4     2 OUC-China  Logitch: Logic Gates and RNA Switch  2020  https://2020.igem…
+## 5     3 Fudan      ALTER                                2019  https://2019.igem…
+## 6     1 Nottingham Engineer a phage which will infect … 2018  http://2018.igem.…
+## 7     2 UCAS-China Constructing an efficient temperatu… 2019  https://2019.igem…
+## 8     3 Stockholm  Create a monitor that can improve c… 2020  https://2020.igem…</code></pre>
+<pre class="r"><code>igem_part</code></pre>
+<pre><code>## # A tibble: 31 x 8
+##       id BBid     type    link              backbone team_name user    device_id
+##    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;    
+##  1     1 BBa_R00… Promot… http://parts.ige… pSB1C3   ZJU-China aputron &lt;NA&gt;     
+##  2     2 BBa_C00… GFP     http://parts.ige… pSB1C3   ZJU-China aputron &lt;NA&gt;     
+##  3     3 BBa_B00… Termin… http://parts.ige… pSB1C3   ZJU-China aputron &lt;NA&gt;     
+##  4     4 BBa_R00… Promot… http://parts.ige… pCDF     UCSF      aputron &lt;NA&gt;     
+##  5     5 Bba_K10… Csy4    http://parts.ige… pACYC    UCSF      aputron &lt;NA&gt;     
+##  6     1 BBa_J23… promot… http://parts.ige… PSB3K3   iBowu-Ch… JinjuL… D0001    
+##  7     2 BBa_B00… RBS     http://parts.ige… PSB3K3   iBowu-Ch… JinjuL… D0001    
+##  8     3 BBa_C00… regula… http://parts.ige… PSB3K3   iBowu-Ch… JinjuL… D0001    
+##  9     4 BBa_B00… termin… http://parts.ige… PSB3K3   iBowu-Ch… JinjuL… D0001    
+## 10     5 BBa_R00… promot… http://parts.ige… PSB3K3   iBowu-Ch… JinjuL… D0001    
+## # … with 21 more rows</code></pre>
+<pre class="r"><code>igem_obs</code></pre>
+<pre><code>## # A tibble: 24 x 12
+##    id    indc     conc  value valunit incubhr incubtemp device_id link  concunit
+##    &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;   
+##  1 1     AHL   1.00e-1     10 FLU     overni… 37 ℃      D0001     http… NA      
+##  2 2     AHL   1.00e+0    100 FLU     overni… 37 ℃      D0001     http… NA      
+##  3 3     AHL   1.00e+1 200000 FLU     overni… 37 ℃      D0001     http… NA      
+##  4 4     AHL   1.00e+2 300000 FLU     overni… 37 ℃      D0001     http… NA      
+##  5 5     AHL   5.00e+2 400000 FLU     overni… 37 ℃      D0001     http… NA      
+##  6 6     AHL   1.00e+3 350000 FLU     overni… 37 ℃      D0001     http… NA      
+##  7 1     HSL   0.          10 fluore… 10 hou… 37 ℃      D0002     http… mg/mL   
+##  8 2     HSL   1.00e-3     30 fluore… 10 hou… 37 ℃      D0002     http… mg/mL   
+##  9 3     HSL   2.00e-3    130 fluore… 10 hou… 37 ℃      D0002     http… mg/mL   
+## 10 4     HSL   1.00e-2    300 fluore… 10 hou… 37 ℃      D0002     http… mg/mL   
+## # … with 14 more rows, and 2 more variables: strain &lt;chr&gt;, device_name &lt;chr&gt;</code></pre>
 </div>
 
 
