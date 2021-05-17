@@ -273,8 +273,10 @@ $(document).ready(function () {
 </div>
 
 
-<div id="data-download" class="section level1">
-<h1>Data download</h1>
+<div id="method-results" class="section level1">
+<h1>Method &amp; Results</h1>
+<div id="data-download" class="section level2">
+<h2>Data download</h2>
 <pre class="r"><code>ids &lt;- c(&quot;hayleykim97&quot;,
          &quot;th-kim310&quot;,
          &quot;Lelp27&quot;,
@@ -292,8 +294,8 @@ for (l in ids) {
   cat(l, &quot;\n&quot;); flush.console()
 }</code></pre>
 </div>
-<div id="data-preprocessing" class="section level1">
-<h1>Data preprocessing</h1>
+<div id="data-preprocessing" class="section level2">
+<h2>Data preprocessing</h2>
 <pre class="r"><code>library(readxl)
 library(tidyverse)
 
@@ -325,6 +327,7 @@ ls_obs_mut &lt;- lapply(ls_team, function(x) x$incubtemp &lt;- as.character(x$in
 ls_obs_mut &lt;- lapply(ls_team, function(x) x$id &lt;- as.character(x$id))
 ls_obs_mut &lt;- lapply(ls_team, function(x) x$incubhr &lt;- as.character(x$incubhr))
 igem_obs &lt;- do.call(bind_rows, ls_obs_mut)</code></pre>
+</div>
 </div>
 
 
